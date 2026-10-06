@@ -62,9 +62,15 @@
     .rsvp { margin-bottom: 48px; padding: 27px 29px; border: 1px solid var(--line); background: var(--white); }
     .rsvp h2 { margin: 0 0 8px; font: 700 28px 'Playfair Display', serif; }
     .rsvp p { margin: 0 0 18px; color: var(--muted); }
-    .rsvp iframe { width: 100%; height: 900px; border: 0; }
-    .rsvp-link { display: inline-block; margin-top: 12px; color: var(--coral-dark); font-weight: 700; }
-    @media (max-width: 760px) { .rsvp { padding: 22px 17px; } }
+    .interest-table-wrap { overflow-x: auto; }
+    .interest-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .interest-table th, .interest-table td { padding: 13px 15px; border-bottom: 1px solid var(--line); }
+    .interest-table th { color: var(--muted); font: 10px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .interest-table td { font-size: 13px; }
+    .interest-table tbody tr:last-child td { border-bottom: 0; }
+    .interest-table .empty-state { color: var(--muted); text-align: center; }
+    .interest-statuses { margin: 15px 0 0; font-size: 11px; }
+    @media (max-width: 760px) { .rsvp { padding: 22px 17px; } .interest-table { min-width: 440px; } }
     .map-section { margin: 0 0 46px; }
     .map-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 17px; }
     .map-heading h2 { margin-bottom: 5px; }
@@ -194,10 +200,28 @@
         <p class="date-footnote">The trip includes nine Japan nights and five Milan-area nights. Milan shopping day Tue, June 1; Lake Como Wed, June 2; Stresa and the Borromean Islands Thu, June 3; Turin Fri, June 4. An overnight in Stresa would replace one Milan-area night. Milan–Turin is served by high-speed trains; Varenna and Stresa use regular trains, with ferries for the lake crossings. Check 2027 train, ferry, and garden schedules closer to travel.</p>
       </section>
       <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
-        <div class="section-label">Join us</div>
-        <h2 id="rsvp-title">Are you interested?</h2>
-        <p>Let us know if you'd like to come, which portion (Japan, Milan, or both), and which dates work for you.</p>
-        <div id="rsvp-body"></div>
+        <div class="section-label">Trip interest</div>
+        <h2 id="rsvp-title">People I know who are interested</h2>
+        <p>Tracking who may join each part of the trip. Statuses reflect what I've heard so far.</p>
+        <div class="interest-table-wrap">
+          <table class="interest-table">
+            <thead><tr><th scope="col">Name</th><th scope="col">Japan</th><th scope="col">Milan</th></tr></thead>
+            <tbody>
+              <tr><td>Blair/Jose</td><td>Interested</td><td>—</td></tr>
+              <tr><td>Dan/Ryan</td><td>Still deciding</td><td>Still deciding</td></tr>
+              <tr><td>Vinny/Jason</td><td>Interested</td><td>—</td></tr>
+              <tr><td>Mamiko</td><td>Interested</td><td>—</td></tr>
+              <tr><td>Paul Donzella</td><td>Interested</td><td>Interested</td></tr>
+              <tr><td>Travis/Vaugh</td><td>—</td><td>Interested</td></tr>
+              <tr><td>Michele/Ryan</td><td>No answer</td><td>No answer</td></tr>
+              <tr><td>MCC/Brian</td><td>No answer</td><td>No answer</td></tr>
+              <tr><td>Sam</td><td>Still deciding</td><td>Still deciding</td></tr>
+              <tr><td>Robert/Trace</td><td>Interested</td><td>Still deciding</td></tr>
+              <tr><td>Eric Hibit</td><td>Still deciding</td><td>Still deciding</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="interest-statuses"><strong>Status options:</strong> Interested · Still deciding · Cannot join · No answer · — not specified</p>
       </section>
       <section class="map-section" aria-labelledby="map-title">
         <div class="map-heading"><div><h2 id="map-title">Route map</h2><p>Follow the proposed May 20–June 5 trip in order from A to I.</p></div></div>
@@ -255,21 +279,6 @@
       </div>
     </main>
   </div>
-  <script>
-    // Paste your Google Form "Send > Embed" URL (the src="..." value) here.
-    const RSVP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfsl4D8-itlE8jBXu2KksDBAUM0QmkMZfMmp-0cWWhFZh1Dxg/viewform?embedded=true';
-    (function () {
-      const body = document.getElementById('rsvp-body');
-      if (!RSVP_FORM_URL) { body.innerHTML = '<p>RSVP form coming soon.</p>'; return; }
-      const f = document.createElement('iframe');
-      f.src = RSVP_FORM_URL; f.title = 'Trip interest form'; f.loading = 'lazy';
-      body.appendChild(f);
-      const a = document.createElement('a');
-      a.className = 'rsvp-link'; a.target = '_blank'; a.rel = 'noreferrer';
-      a.href = RSVP_FORM_URL.replace('?embedded=true', ''); a.textContent = 'Open the form in a new tab';
-      body.appendChild(a);
-    })();
-  </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     const mapElement = document.querySelector('#trip-map');
